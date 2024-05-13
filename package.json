@@ -1,5 +1,5 @@
 {
-  "name": "angular-airnes",
+  "name": "angular-airneis",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:angular-airnes": "node dist/angular-airnes/server/server.mjs"
+    "serve:ssr:angular-airneis": "node dist/angular-airneis/server/server.mjs"
   },
   "private": true,
   "dependencies": {
