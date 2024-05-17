@@ -1,0 +1,17 @@
+<div *ngIf="!this.isLogin">
+  <h4>Se Connecter</h4>
+  <form #myform="ngForm" (ngSubmit)="onSubmit(myform)">
+    <input type="text" name="username" placeholder="Username" ngModel /><br />
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      ngModel
+    /><br />
+    <input type="submit" value="Login" />
+  </form>
+</div>
+<div *ngIf="this.isLogin">
+  <h1>You are logged in</h1>
+  <button (click)="logout()">Log-out</button>
+</div>

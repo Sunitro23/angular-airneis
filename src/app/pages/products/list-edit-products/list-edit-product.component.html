@@ -1,0 +1,18 @@
+<div class="margin">
+  <h1>PRODUCTS</h1>
+  <app-view-product
+    [products]="products"
+    (editProduct)="selectedProduct = $event"
+    (deleteProduct)="deleteProduct($event)"
+  ></app-view-product>
+</div>
+
+<mat-card *ngIf="selectedProduct" class="edit">
+  <mat-card-content>
+    <mat-icon (click)="close()" class="close">close</mat-icon>
+    <app-edit-product
+      [product]="selectedProduct"
+      (sendNewProduct)="updateProduct($event)"
+    ></app-edit-product>
+  </mat-card-content>
+</mat-card>

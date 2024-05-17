@@ -1,0 +1,14 @@
+<div class="margin">
+  <h1>SESSIONS</h1>
+  <app-view-session
+    [sessions]="sessions"
+    (sendSession)="selectedSession = $event"
+  ></app-view-session>
+</div>
+
+<mat-card *ngIf="selectedSession" class="edit">
+  <mat-card-content>
+    <mat-icon (click)="close()" class="close">close</mat-icon>
+    <app-edit-session [session]="selectedSession"></app-edit-session>
+  </mat-card-content>
+</mat-card>

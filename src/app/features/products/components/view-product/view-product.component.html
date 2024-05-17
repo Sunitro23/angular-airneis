@@ -1,0 +1,49 @@
+<mat-table [dataSource]="products" class="mat-elevation-z8">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+    <mat-cell *matCellDef="let product"> {{ product.name }} </mat-cell>
+  </ng-container>
+
+  <!-- Price Column -->
+  <ng-container matColumnDef="price">
+    <mat-header-cell *matHeaderCellDef> Prix </mat-header-cell>
+    <mat-cell *matCellDef="let product"> {{ product.price }} </mat-cell>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+    <mat-cell *matCellDef="let product"> {{ product.description }} </mat-cell>
+  </ng-container>
+
+  <!-- Category Column -->
+  <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef> Catégorie </mat-header-cell>
+    <mat-cell *matCellDef="let product"> {{ product.idCategory.libelle }} </mat-cell>
+  </ng-container>
+
+  <!-- Edit Column -->
+  <ng-container matColumnDef="action_edit" class="action">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <button mat-raised-button color="accent" (click)="onSelect(product)">
+        Modifier
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Delete Column -->
+  <ng-container matColumnDef="action_delete" class="action">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <button mat-raised-button color="accent" (click)="onDelete(product)">
+        Supprimer
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Define columns to display in the table -->
+  <mat-header-row *matHeaderRowDef="['name', 'price', 'description', 'category', 'action_edit', 'action_delete']"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: ['name', 'price', 'description', 'category', 'action_edit', 'action_delete']"></mat-row>
+</mat-table>

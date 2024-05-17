@@ -1,0 +1,50 @@
+<mat-table [dataSource]="sessions" *ngIf="sessions" class="mat-elevation-z8">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
+    <mat-cell *matCellDef="let session"> {{ session.name }} </mat-cell>
+  </ng-container>
+
+  <!-- Days Column -->
+  <ng-container matColumnDef="nbJour">
+    <mat-header-cell *matHeaderCellDef> Nombre de jours </mat-header-cell>
+    <mat-cell *matCellDef="let session">
+      {{ session.nbJour }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Module Column -->
+  <ng-container matColumnDef="module">
+    <mat-header-cell *matHeaderCellDef> Module </mat-header-cell>
+    <mat-cell *matCellDef="let session">{{ session.module }}</mat-cell>
+  </ng-container>
+
+  <!-- Habilitation Column -->
+  <ng-container matColumnDef="habilitation">
+    <mat-header-cell *matHeaderCellDef> Habilitation </mat-header-cell>
+    <mat-cell *matCellDef="let session">
+      {{ session.habilitation.libelle }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Type of Session Column -->
+  <ng-container matColumnDef="typeSession">
+    <mat-header-cell *matHeaderCellDef> Type de session </mat-header-cell>
+    <mat-cell *matCellDef="let session">
+      {{ session.typeSession.libelle }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Edit Column -->
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let session">
+      <button mat-raised-button color="accent" (click)="onSelect(session)">
+        Modifier
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

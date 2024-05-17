@@ -1,0 +1,36 @@
+<h1>{{ session.name | uppercase }}</h1>
+
+<mat-form-field class="inputSession">
+  <mat-label>Nom :</mat-label>
+  <input matInput type="text" [(ngModel)]="session.name" placeholder="name" />
+</mat-form-field>
+<mat-form-field class="inputSession">
+  <mat-label>Nombres de jours :</mat-label>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="session.nbJour"
+    placeholder="nbJour"
+  />
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Habilitation</mat-label>
+  <mat-select [(ngModel)]="session.habilitation" name="habilitation">
+    <mat-option
+      *ngFor="let habilitation of habilitations"
+      [value]="habilitation"
+    >
+      {{ habilitation.libelle }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Type de Session</mat-label>
+  <mat-select [(ngModel)]="session.typeSession" name="typeSession">
+    <mat-option *ngFor="let typesession of typeSessions" [value]="typesession">
+      {{ typesession.libelle }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
