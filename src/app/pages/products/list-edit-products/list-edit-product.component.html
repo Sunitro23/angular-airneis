@@ -1,18 +1,15 @@
-<div class="margin">
+<div class="margin" *ngIf="!isTooSmall">
   <h1>PRODUCTS</h1>
   <app-view-product
     [products]="products"
-    (editProduct)="selectedProduct = $event"
+    (editProduct)="dialogEditProduct($event)"
     (deleteProduct)="deleteProduct($event)"
   ></app-view-product>
 </div>
-
-<mat-card *ngIf="selectedProduct" class="edit">
-  <mat-card-content>
-    <mat-icon (click)="close()" class="close">close</mat-icon>
-    <app-edit-product
-      [product]="selectedProduct"
-      (sendNewProduct)="updateProduct($event)"
-    ></app-edit-product>
-  </mat-card-content>
-</mat-card>
+<div class="margin" *ngIf="isTooSmall">
+  <app-view-card-product
+    [products]="products"
+    (editProduct)="dialogEditProduct($event)"
+    (deleteProduct)="deleteProduct($event)"
+  ></app-view-card-product>
+</div>

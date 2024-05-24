@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Product } from '../../models/type-product.model';
+import { take } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { Product } from '../../../../models/type-product.model';
 
 @Component({
   selector: 'app-edit-product',
@@ -9,32 +11,34 @@ import { Product } from '../../models/type-product.model';
 })
 export class EditProductComponent implements OnInit {
   @Input() product!: Product;
-  @Output() sendNewProduct = new EventEmitter<Product>();
+  @Output() editProduct = new EventEmitter<Product>();
 
-  public editForm!: FormGroup;
+  public groupForm!: FormGroup;
+
+  constructor(private fb: FormBuilder, private _userService: UserService) {}
 
   ngOnInit(): void {
     this._initGroupForm();
   }
 
   private _initGroupForm() {
-    this.editForm = this.fb.group({
-      idProduct: [this.product.idProduct],
+    this.groupForm = this.fb.group({
+      id: [this.product.id],
       name: [this.product.name, Validators.required],
-      price: [this.product.price, Validators.required],
-      description: [this.product.description, Validators.required],
-      category: this.fb.group({
-        idCategory: [this.product.idCategory.idCategory],
-        libelle: [this.product.idCategory.libelle],
-      }),
+      first_name: [this.product.first_name, Validators.required],
+      email: [this.product.email, Validators.required],
+      centre: [this.product.centre],
+      organisme: [this.product.organisme],
+      perenne: [this.product.perenne],
+      occasionnel: [this.product.occasionnel],
+      active: [true],
     });
   }
 
   onSubmit() {
-    if (this.editForm.valid) {
-      this.sendNewProduct.emit(this.editForm.value);
+    this.groupForm.markAllAsTouched();
+    if (this.groupForm.valid) {
+      this.editProduct.emit(this.groupForm.value);
     }
   }
-
-  constructor(private fb: FormBuilder) {}
 }

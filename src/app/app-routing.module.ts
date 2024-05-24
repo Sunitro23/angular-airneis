@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/components/login/login.component';
-import { RegisterComponent } from './auth/components/register/register.component';
+import { AppComponent } from './app.component';
+import { AdminGuard } from './services/guards/admin.guard';
+import { LoginGuard } from './services/guards/login.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
   {
     path: 'product',
     loadChildren: () =>
@@ -14,11 +13,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'session',
+    path: 'auth',
     loadChildren: () =>
-      import('./pages/sessions/page-sessions.module').then(
-        (m) => m.PageSessionsModule
-      ),
+      import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
 ];
 

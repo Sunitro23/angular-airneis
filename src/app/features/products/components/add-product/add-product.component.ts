@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProductService } from './../../../../services/product.service';
+import { take } from 'rxjs';
+import { CreateProductDTO } from '../../../../models/type-product.model';
+import { ProductService } from '../../../../services/product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -9,7 +11,10 @@ import { ProductService } from './../../../../services/product.service';
   styleUrls: ['./add-product.component.scss'],
 })
 export class AddProductComponent {
-  public editForm!: FormGroup;
+  public groupForm!: FormGroup;
+  public get productFromForm(): CreateProductDTO {
+    return this.groupForm.value;
+  }
 
   constructor(
     private _productService: ProductService,
@@ -22,10 +27,10 @@ export class AddProductComponent {
   }
 
   private _initGroupForm() {
-    this.editForm = this._fb.group({
-      id: [null],
+    this.groupForm = this._fb.group({
       name: ['', Validators.required],
       first_name: ['', Validators.required],
+      email: ['', Validators.required],
       centre: [false],
       organisme: [false],
       perenne: [false],
@@ -34,10 +39,14 @@ export class AddProductComponent {
   }
 
   onSubmit() {
-    if (this.editForm.valid) {
-      const product = this.editForm.value;
-      this._productService.addProduct(product);
-      this._router.navigate(['/product/list']);
+    this.groupForm.markAllAsTouched();
+    if (this.groupForm.valid) {
+      this._productService
+        .addProduct(this.productFromForm)
+        .pipe(take(1))
+        .subscribe(() => {
+          this._router.navigate(['/product/list']);
+        });
     }
   }
 }

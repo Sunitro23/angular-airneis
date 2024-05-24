@@ -1,33 +1,113 @@
-<mat-table [dataSource]="products" class="mat-elevation-z8">
+<mat-form-field>
+  <mat-label>Filtre</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ex. Houston"
+    #input
+  />
+</mat-form-field>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <!-- Product Column -->
+  <ng-container matColumnDef="product">
+    <mat-header-cell *matHeaderCellDef class="no-border">
+      Infos Products
+    </mat-header-cell>
+  </ng-container>
+
+  <!-- Interne Column -->
+  <ng-container matColumnDef="interne">
+    <mat-header-cell *matHeaderCellDef>Interne </mat-header-cell>
+  </ng-container>
+
+  <!-- Externe Column -->
+  <ng-container matColumnDef="externe">
+    <mat-header-cell *matHeaderCellDef> Externe </mat-header-cell>
+  </ng-container>
+
+  <!-- Empty Column -->
+  <ng-container matColumnDef="empty">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+  </ng-container>
+
   <!-- Name Column -->
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Nom </mat-header-cell>
-    <mat-cell *matCellDef="let product"> {{ product.name }} </mat-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <div class="wordwrap">
+        {{ product.name }}
+      </div>
+    </mat-cell>
   </ng-container>
 
-  <!-- Price Column -->
-  <ng-container matColumnDef="price">
-    <mat-header-cell *matHeaderCellDef> Prix </mat-header-cell>
-    <mat-cell *matCellDef="let product"> {{ product.price }} </mat-cell>
+  <!-- First Name Column -->
+  <ng-container matColumnDef="first_name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>
+      Prénom
+    </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <div class="wordwrap">
+        {{ product.first_name }}
+      </div>
+    </mat-cell>
   </ng-container>
 
-  <!-- Description Column -->
-  <ng-container matColumnDef="description">
-    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-    <mat-cell *matCellDef="let product"> {{ product.description }} </mat-cell>
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <div class="wordwrap">
+        {{ product.email }}
+      </div>
+    </mat-cell>
   </ng-container>
 
-  <!-- Category Column -->
-  <ng-container matColumnDef="category">
-    <mat-header-cell *matHeaderCellDef> Catégorie </mat-header-cell>
-    <mat-cell *matCellDef="let product"> {{ product.idCategory.libelle }} </mat-cell>
+  <!-- Centre Column -->
+  <ng-container matColumnDef="centre">
+    <mat-header-cell *matHeaderCellDef>
+      <div class="boolean">Du Centre</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <span>{{ product.centre | displayBoolean }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Organisme Column -->
+  <ng-container matColumnDef="organisme">
+    <mat-header-cell *matHeaderCellDef>
+      <div class="boolean">Organisme</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <span>{{ product.organisme | displayBoolean }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Perenne Column -->
+  <ng-container matColumnDef="perenne">
+    <mat-header-cell *matHeaderCellDef>
+      <div class="boolean">Perenne</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <span>{{ product.perenne | displayBoolean }}</span>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Occasionnel Column -->
+  <ng-container matColumnDef="occasionnel">
+    <mat-header-cell *matHeaderCellDef>
+      <div class="boolean">Occasionnel</div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let product">
+      <span>{{ product.occasionnel | displayBoolean }}</span>
+    </mat-cell>
   </ng-container>
 
   <!-- Edit Column -->
   <ng-container matColumnDef="action_edit" class="action">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let product">
-      <button mat-raised-button color="accent" (click)="onSelect(product)">
+      <button mat-raised-button color="accent" (click)="onEdit(product)">
         Modifier
       </button>
     </mat-cell>
@@ -43,7 +123,16 @@
     </mat-cell>
   </ng-container>
 
-  <!-- Define columns to display in the table -->
-  <mat-header-row *matHeaderRowDef="['name', 'price', 'description', 'category', 'action_edit', 'action_delete']"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: ['name', 'price', 'description', 'category', 'action_edit', 'action_delete']"></mat-row>
+  <mat-header-row
+    *matHeaderRowDef="['product', 'interne', 'externe', 'empty']"
+  ></mat-header-row>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
+
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+  aria-label="Choisir une page"
+>
+</mat-paginator>

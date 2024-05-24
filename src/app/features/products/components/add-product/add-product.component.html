@@ -1,39 +1,30 @@
-<form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="form-field">
+<form [formGroup]="groupForm" (ngSubmit)="onSubmit()" class="form-field">
   <!--Input Name-->
-  <mat-form-field class="inputProduct">
+  <mat-form-field appErrorDirective>
     <mat-label>Nom :</mat-label>
     <input matInput type="text" formControlName="name" />
   </mat-form-field>
 
   <!--Input First Name-->
-  <mat-form-field class="inputProduct">
+  <mat-form-field appErrorDirective>
     <mat-label>Prénom :</mat-label>
     <input matInput type="text" formControlName="first_name" />
   </mat-form-field>
 
-  <!--Checkbox Centre-->
-  <mat-checkbox class="example-margin" formControlName="centre">
-    Du Centre
-  </mat-checkbox>
-  <!--Checkbox Organisme-->
-  <mat-checkbox class="example-margin" formControlName="organisme">
-    De l'Organisme
-  </mat-checkbox>
-  <!--Checkbox Perenne-->
-  <mat-checkbox class="example-margin" formControlName="perenne">
-    Perenne
-  </mat-checkbox>
-  <!--Checkbox Occasionnel-->
-  <mat-checkbox class="example-margin" formControlName="occasionnel">
-    Occasionnel
-  </mat-checkbox>
+  <!--Input Mail-->
+  <mat-form-field appErrorDirective>
+    <mat-label>Email :</mat-label>
+    <input matInput type="text" formControlName="email" />
+  </mat-form-field>
 
-  <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="!editForm.valid"
-  >
-    Enregistrer
-  </button>
+  <!--Checkbox Centre-->
+  <mat-checkbox formControlName="centre"> Du Centre </mat-checkbox>
+  <!--Checkbox Organisme-->
+  <mat-checkbox formControlName="organisme"> De l'Organisme </mat-checkbox>
+  <!--Checkbox Perenne-->
+  <mat-checkbox formControlName="perenne"> Perenne </mat-checkbox>
+  <!--Checkbox Occasionnel-->
+  <mat-checkbox formControlName="occasionnel"> Occasionnel </mat-checkbox>
+
+  <button mat-raised-button color="primary" type="submit">Enregistrer</button>
 </form>

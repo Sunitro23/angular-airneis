@@ -1,27 +1,48 @@
-.mat-column-occasionnel,
-.mat-column-perenne,
-.mat-column-organisme,
-.mat-column-centre,
-.mat-column-action_edit,
-.mat-column-action_delete {
-  max-width: 10%;
+mat-cell {
+  min-height: 70px;
+}
+mat-header-cell {
+  text-align: center;
+  justify-content: center;
+  min-height: 110px;
+  font-weight: bold;
+}
+//Products Infos
+.mat-column-product {
+  min-width: 60%;
 }
 .mat-column-name,
 .mat-column-first_name,
-.mat-column-empty,
-.mat-column-externe,
-.mat-column-interne {
-  max-width: 20%;
+.mat-column-email {
+  min-width: 20%;
 }
-.mat-column-product {
-  max-width: 40%;
+//Actions Column
+.mat-column-empty {
+  min-width: 20%;
 }
 
-mat-cell,
-mat-header-cell {
-  justify-content: center;
-  height: 70px;
+.mat-column-action_edit,
+.mat-column-action_delete {
+  min-width: 10%;
 }
-mat-header-cell {
-  font-weight: bold;
+//Booleans
+.mat-column-centre,
+.mat-column-organisme,
+.mat-column-perenne,
+.mat-column-occasionnel {
+  min-width: 5%;
+  justify-content: center;
+}
+.mat-column-interne,
+.mat-column-externe {
+  min-width: 10%;
+}
+.boolean {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
 }

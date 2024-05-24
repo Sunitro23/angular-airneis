@@ -1,0 +1,21 @@
+<mat-toolbar color="primary" class="toolbar">
+  <a class="logo" routerLink="/">
+    <img
+      src
+      alt="Logo Airneis" />
+  </a>
+  <!--Login Buttons-->
+  <div class="left">
+    <button class="button-toolbar" routerLink="/login" *ngIf="!isLogin">
+      Login
+    </button>
+    <button class="button-toolbar" (click)="logout()" *ngIf="isLogin">
+      Disconnect
+    </button>
+    <button class="button-toolbar" routerLink="/register" *ngIf="!isLogin">
+      Register
+    </button>
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

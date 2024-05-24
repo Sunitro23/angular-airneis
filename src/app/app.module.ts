@@ -1,29 +1,34 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule } from './auth/auth/auth.module';
 import { MenuModule } from './pages/menu/page-menu.module';
-import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './pages/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    HttpClientModule,
+    AuthModule,
     MenuModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    AuthModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    MatCardModule,
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [{ provide: MatPaginatorIntl}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

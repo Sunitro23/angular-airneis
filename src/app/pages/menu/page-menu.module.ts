@@ -1,3 +1,4 @@
+import { MenuComponent } from './components/menu.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +11,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [MenuComponent],
