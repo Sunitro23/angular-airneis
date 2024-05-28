@@ -1,0 +1,92 @@
+<div class="toolbars">
+    <mat-toolbar id="product_toolbar">
+        <div class="left-toolbar">
+            <!-- Input for search query -->
+            <mat-form-field appearance="outline" id="search">
+                <input matInput placeholder="Search" type="text"
+                    [(ngModel)]="productOptions.search_query"
+                    (keyup.enter)="loadProducts()">
+            </mat-form-field>
+        </div>
+
+        <!-- Paginator for pagination -->
+        <mat-paginator [length]="total_items" [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="onPageChange($event)" [disabled]="isLoadingProducts">
+        </mat-paginator>
+    </mat-toolbar>
+    <mat-toolbar id="sub-toolbar">
+        <!-- Dropdown for sorting options -->
+        <mat-form-field appearance="outline">
+            <mat-select (selectionChange)="loadProducts()"
+                [(value)]="productOptions.sort_by">
+                <mat-option value="price">Sort by Price</mat-option>
+                <mat-option value="stock">Sort by Stock</mat-option>
+                <mat-option value="date_published">Sort by Date</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!-- Dropdown for sorting order -->
+        <mat-form-field appearance="outline">
+            <mat-select (selectionChange)="loadProducts()"
+                [(value)]="productOptions.sort_order">
+                <mat-option value="asc">Ascending</mat-option>
+                <mat-option value="desc">Descending</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!-- Field for filtering by category -->
+        <mat-form-field appearance="outline">
+            <mat-select (selectionChange)="loadProducts()"
+                [(value)]="productOptions.idCategory">
+                <mat-option value="all">All Categories</mat-option>
+                <mat-option *ngFor="let category of categories"
+                    [value]="category.idCategory">
+                    {{ category.libelle }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!-- Field for minimal price -->
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Min Price" type="number"
+                [(ngModel)]="productOptions.min_price"
+                (keyup.enter)="loadProducts()">
+        </mat-form-field>
+        <!-- Field for maximal price -->
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Max Price" type="number"
+                [(ngModel)]="productOptions.max_price"
+                (keyup.enter)="loadProducts()">
+        </mat-form-field>
+    </mat-toolbar>
+</div>
+<!-- Container for product grid -->
+<div class="product-grid">
+    <!-- Card for each product -->
+    <mat-card *ngFor="let product of productImages" class="mat-card_product">
+        <mat-card-title>
+            <!-- Product image -->
+            <img mat-card-image [src]="product.images[0].file"
+                alt="{{ product.images[0].image.alt }}">
+            <!-- Product name -->
+            <div class="name_cat">
+                <h1 class="name">{{ product.product.name.charAt(0).toUpperCase()
+                    +
+                    product.product.name.slice(1) }}</h1>
+                <!-- Product category -->
+                <p class="category">{{product.product.idCategory.libelle}}</p>
+            </div>
+        </mat-card-title>
+        <mat-card-content>
+            <!-- Product price -->
+            <p class="price">{{ product.product.price }}$</p>
+            <!-- Product description -->
+            <p class="description">{{ product.product.description }}</p>
+            <div class="stock_date">
+                <!-- Product stock -->
+                <p class="stock">Stock: {{ product.product.stock }}</p>
+                <!-- Product date published -->
+                <p class="date"> {{ product.product.date_published | date:
+                    'dd/MM/yyyy' }}</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
