@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    HomeModule,
     HttpClientModule,
     AuthModule,
     MenuModule,
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
+    ProductsModule,
   ],
   providers: [{ provide: MatPaginatorIntl }],
   bootstrap: [AppComponent],

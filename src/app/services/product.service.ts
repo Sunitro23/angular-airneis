@@ -1,35 +1,54 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { CreateProductDTO, Product } from '../models/type-product.model';
+import {
+  Category,
+  Product,
+  ProductOptions,
+  Products,
+} from '../models/type-product.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private productUrl = 'http://localhost:3000/product/';
-  constructor(private _http: HttpClient) {}
+  private productUrl = 'http://localhost:5000/products';
 
-  public getProducts(): Observable<Product[]> {
-    return this._http.get<Product[]>(this.productUrl);
+  constructor(private http: HttpClient) {}
+
+  public async getProducts(options: ProductOptions): Promise<Products> {
+    const headers = { 'Content-Type': 'application/json' };
+    const body = JSON.stringify(options);
+    const response = await this.http
+      .request<Products>('POST', `${this.productUrl}/options`, {
+        body,
+        headers,
+      })
+      .toPromise();
+
+    return (
+      response || {
+        products: [],
+        total_pages: 0,
+        current_page: 0,
+        total_items: 0,
+      }
+    );
   }
 
-  public getById(id: number): Observable<Product> {
-    return this._http.get<Product>(this.productUrl + id);
-  }
-
-  public deleteProduct(product: Product): Observable<Product> {
-    return this._http.delete<Product>(this.productUrl + product.id);
-  }
-
-  public updateProduct({
-    id,
-    ...product
-  }: Product): Observable<Product> {
-    return this._http.patch<Product>(this.productUrl + id, product);
-  }
-
-  public addProduct(product: CreateProductDTO) {
-    return this._http.post<Product>(this.productUrl, product);
+  public async getCategories(products: Product[]): Promise<Category[]> {
+    const categories: Category[] = [];
+    products.forEach((product) => {
+      if (
+        !categories.some(
+          (category) => category.idCategory === product.idCategory.idCategory
+        )
+      ) {
+        categories.push({
+          idCategory: product.idCategory.idCategory,
+          libelle: product.idCategory.libelle,
+        });
+      }
+    });
+    return categories;
   }
 }

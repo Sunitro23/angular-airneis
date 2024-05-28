@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   async onSubmit() {
     if (this.groupForm.valid) {
-      const email: string = this.groupForm.controls['login'].value;
+      const email: string = this.groupForm.controls['email'].value;
       const password: string = this.groupForm.controls['password'].value;
       if (await this._userService.findUser(email, password)) {
         this._router.navigate(['/']);
