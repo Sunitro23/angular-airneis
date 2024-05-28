@@ -102,6 +102,7 @@
 // $custom-primary: mat.define-palette($md-bluepalette, 900);
 // $custom-warn: mat.define-palette($md-redpalette, 500);
 
+<<<<<<< Updated upstream
 // $my-theme: mat.define-light-theme(
 //   (
 //     color: (
@@ -113,3 +114,17 @@
 //   )
 // );
 // @include mat.all-component-themes($my-theme);
+=======
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $custom-primary,
+      accent: $custom-acccent,
+      warn: $custom-warn,
+      white: #ffffff,
+    ),
+    density: 0,
+  )
+);
+@include mat.all-component-themes($my-theme);
+>>>>>>> Stashed changes

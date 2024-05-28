@@ -1,3 +1,8 @@
+<<<<<<< Updated upstream
+=======
+import { HomeModule } from './pages/home/home.module';
+import { HttpClientModule } from '@angular/common/http';
+>>>>>>> Stashed changes
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +15,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuModule } from './pages/menu/page-menu.module';
 import { AuthModule } from './pages/auth/auth.module';
+<<<<<<< Updated upstream
 import { HttpClientModule } from '@angular/common/http';
+=======
+import { ProductsModule } from './features/products/products.module';
+
+>>>>>>> Stashed changes
 @NgModule({
   declarations: [AppComponent],
   imports: [
