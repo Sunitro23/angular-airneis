@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuModule } from './pages/menu/page-menu.module';
 import { AuthModule } from './pages/auth/auth.module';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,7 +27,7 @@ import { AuthModule } from './pages/auth/auth.module';
     MatCardModule,
     MatButtonModule,
   ],
-  providers: [{ provide: MatPaginatorIntl}],
+  providers: [{ provide: MatPaginatorIntl }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
