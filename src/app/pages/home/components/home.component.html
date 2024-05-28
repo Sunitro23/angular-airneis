@@ -1,0 +1,45 @@
+<mat-carousel
+  timings="250ms ease-in"
+  autoplay
+  interval="5000"
+  loop
+  color="accent"
+  maxWidth="auto"
+  proportion="25"
+  slides="5"
+  svgIcon="keyboard_arrow_right"
+  hideArrows="false"
+  hideIndicators="false"
+  useKeyboard="true"
+  useMouseWheel="false"
+  orientation="ltr"
+>
+  <mat-carousel-slide
+    *ngFor="let slide of [1, 2, 3]; index as i"
+    image="https://source.unsplash.com/random/1"
+    overlayColor="#ffffff"
+    hideOverlay="false"
+  ></mat-carousel-slide>
+</mat-carousel><mat-carousel
+  timings="250ms ease-in"
+  autoplay
+  interval="5000"
+  loop
+  color="accent"
+  maxWidth="auto"
+  proportion="25"
+  slides="5"
+  svgIcon="keyboard_arrow_right"
+  hideArrows="false"
+  hideIndicators="false"
+  useKeyboard="true"
+  useMouseWheel="false"
+  orientation="ltr"
+>
+  <mat-carousel-slide
+    *ngFor="let slide of [1, 2, 3]; index as i"
+    image="https://source.unsplash.com/random/1"
+    overlayColor="#ffffff"
+    hideOverlay="false"
+  ></mat-carousel-slide>
+</mat-carousel>
