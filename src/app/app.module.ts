@@ -38,7 +38,9 @@ import { ProductsModule } from './features/products/products.module';
     MatCardModule,
     MatButtonModule,
     ProductsModule,
+    ProductsModule,
   ],
+  providers: [{ provide: MatPaginatorIntl }],
   providers: [{ provide: MatPaginatorIntl }],
   bootstrap: [AppComponent],
 })
