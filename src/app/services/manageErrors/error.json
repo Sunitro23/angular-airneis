@@ -1,0 +1,4 @@
+{
+  "required": "This field is required",
+  "pattern": "This field is invalid"
+}
