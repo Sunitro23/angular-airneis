@@ -1,45 +1,46 @@
-<mat-carousel
-  timings="250ms ease-in"
-  autoplay
-  interval="5000"
-  loop
-  color="accent"
-  maxWidth="auto"
-  proportion="25"
-  slides="5"
-  svgIcon="keyboard_arrow_right"
-  hideArrows="false"
-  hideIndicators="false"
-  useKeyboard="true"
-  useMouseWheel="false"
-  orientation="ltr"
->
-  <mat-carousel-slide
-    *ngFor="let slide of [1, 2, 3]; index as i"
-    image="https://source.unsplash.com/random/1"
-    overlayColor="#ffffff"
-    hideOverlay="false"
-  ></mat-carousel-slide>
-</mat-carousel><mat-carousel
-  timings="250ms ease-in"
-  autoplay
-  interval="5000"
-  loop
-  color="accent"
-  maxWidth="auto"
-  proportion="25"
-  slides="5"
-  svgIcon="keyboard_arrow_right"
-  hideArrows="false"
-  hideIndicators="false"
-  useKeyboard="true"
-  useMouseWheel="false"
-  orientation="ltr"
->
-  <mat-carousel-slide
-    *ngFor="let slide of [1, 2, 3]; index as i"
-    image="https://source.unsplash.com/random/1"
-    overlayColor="#ffffff"
-    hideOverlay="false"
-  ></mat-carousel-slide>
-</mat-carousel>
+<mat-card class="top-html-part">
+  <div class="header">
+    <!--Carousel-->
+    <div class="carousel">
+      <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let slide of slidesStore">
+          <ng-template carouselSlide>
+            <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+      <mat-card-content>
+        <h1>OUR SELECTION</h1>
+      </mat-card-content>
+    </div>
+    <!--Category Grid-->
+    <div class="categories">
+      <mat-card-content>
+        <h2>Categories</h2>
+        <mat-grid-list cols="3" rowHeight="200px">
+          <mat-grid-tile *ngFor="let category of categories_image">
+            <img [src]="category.image.file" [alt]="category.category.libelle">
+            <mat-grid-tile-footer>
+              {{ category.category.libelle}}
+            </mat-grid-tile-footer>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+    </div>
+  </div>
+  <!--Product Grid-->
+  <div class="product-grid">
+    <h2>Highlanders of the moment</h2>
+    <mat-card-content>
+      <mat-grid-list cols="4" rowHeight="250px">
+        <mat-grid-tile *ngFor="let product of highlanders">
+          <img [src]="product.images[0].file"
+            [alt]="product.images[0].alt">
+          <mat-grid-tile-footer>
+            {{ product.product.name }}
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </div>
+</mat-card>

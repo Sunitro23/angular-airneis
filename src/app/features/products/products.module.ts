@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, NgModel } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { RouterModule, Routes } from '@angular/router';
+const routes: Routes = [{ path: 'list', component: ListProductsComponent }];
 
 @NgModule({
   declarations: [ListProductsComponent],
@@ -21,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
     MatSelectModule,
     FormsModule,
     MatInputModule,
+    RouterModule.forChild(routes), // Add this line
   ],
   providers: [ProductService],
   exports: [ListProductsComponent],

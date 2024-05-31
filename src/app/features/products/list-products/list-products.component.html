@@ -1,11 +1,11 @@
-<div class="toolbars">
+<div class="toolbars top-html-part">
     <mat-toolbar id="product_toolbar">
         <div class="left-toolbar">
             <!-- Input for search query -->
             <mat-form-field appearance="outline" id="search">
                 <input matInput placeholder="Search" type="text"
                     [(ngModel)]="productOptions.search_query"
-                    (keyup.enter)="loadProducts()">
+                    (keyup.enter)="loadProducts(); resetPaginator();">
             </mat-form-field>
         </div>
 
@@ -18,7 +18,7 @@
     <mat-toolbar id="sub-toolbar">
         <!-- Dropdown for sorting options -->
         <mat-form-field appearance="outline">
-            <mat-select (selectionChange)="loadProducts()"
+            <mat-select (selectionChange)="loadProducts(); resetPaginator();"
                 [(value)]="productOptions.sort_by">
                 <mat-option value="price">Sort by Price</mat-option>
                 <mat-option value="stock">Sort by Stock</mat-option>
@@ -27,7 +27,7 @@
         </mat-form-field>
         <!-- Dropdown for sorting order -->
         <mat-form-field appearance="outline">
-            <mat-select (selectionChange)="loadProducts()"
+            <mat-select (selectionChange)="loadProducts(); resetPaginator();"
                 [(value)]="productOptions.sort_order">
                 <mat-option value="asc">Ascending</mat-option>
                 <mat-option value="desc">Descending</mat-option>
@@ -35,7 +35,7 @@
         </mat-form-field>
         <!-- Field for filtering by category -->
         <mat-form-field appearance="outline">
-            <mat-select (selectionChange)="loadProducts()"
+            <mat-select (selectionChange)="loadProducts(); resetPaginator();"
                 [(value)]="productOptions.idCategory">
                 <mat-option value="all">All Categories</mat-option>
                 <mat-option *ngFor="let category of categories"
@@ -48,13 +48,13 @@
         <mat-form-field appearance="outline">
             <input matInput placeholder="Min Price" type="number"
                 [(ngModel)]="productOptions.min_price"
-                (keyup.enter)="loadProducts()">
+                (keyup.enter)="loadProducts(); resetPaginator();">
         </mat-form-field>
         <!-- Field for maximal price -->
         <mat-form-field appearance="outline">
             <input matInput placeholder="Max Price" type="number"
                 [(ngModel)]="productOptions.max_price"
-                (keyup.enter)="loadProducts()">
+                (keyup.enter)="loadProducts(); resetPaginator();">
         </mat-form-field>
     </mat-toolbar>
 </div>
@@ -64,13 +64,16 @@
     <mat-card *ngFor="let product of productImages" class="mat-card_product">
         <mat-card-title>
             <!-- Product image -->
-            <img mat-card-image [src]="product.images[0].file"
-                alt="{{ product.images[0].image.alt }}">
+            <div class="img-container">
+                <img mat-card-image [src]="product.images[0].file"
+                    alt="{{ product.images[0].alt }}">
+            </div>
             <!-- Product name -->
             <div class="name_cat">
-                <h1 class="name">{{ product.product.name.charAt(0).toUpperCase()
-                    +
-                    product.product.name.slice(1) }}</h1>
+                <h1 class="name">
+                    {{ product.product.name.charAt(0).toUpperCase()+
+                    product.product.name.slice(1) }}
+                </h1>
                 <!-- Product category -->
                 <p class="category">{{product.product.idCategory.libelle}}</p>
             </div>

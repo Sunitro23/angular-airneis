@@ -1,4 +1,5 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 
 .mat-expansion-panel-body {
   padding: 0 !important;
@@ -26,6 +27,8 @@ body {
   @media (max-width: 599px) {
     margin: 0;
   }
+  margin: 0 5%;
+  overflow-x: hidden;
 }
 
 .wordwrap {
@@ -59,4 +62,33 @@ body {
 .mat-mdc-text-field-wrapper {
   background-color: white !important;
   color: white !important;
+}
+.top-html-part {
+  margin-top: 75px;
+}
+.owl-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  top: 45%;
+  .owl-prev,
+  .owl-next {
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    z-index: 1;
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+      z-index: 999;
+    }
+  }
 }

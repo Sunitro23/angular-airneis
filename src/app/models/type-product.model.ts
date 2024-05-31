@@ -1,4 +1,5 @@
-import { ImageFile } from './type-image.model';
+import { Category } from './type-category.model';
+import { Image } from './type-image.model';
 export interface Products {
   products: Product[];
   total_pages: number;
@@ -16,10 +17,6 @@ export interface Product {
   idCategory: Category;
 }
 
-export interface Category {
-  idCategory: number;
-  libelle: string;
-}
 export interface ProductInput {
   name: string;
   price: number;
@@ -28,7 +25,7 @@ export interface ProductInput {
 }
 export interface ProductImages {
   product: Product;
-  images: ImageFile[];
+  images: Image[];
 }
 export interface ProductOptions {
   page: number;

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Image, ImageFile } from '../models/type-image.model';
+import { Image } from '../models/type-image.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Category, CategoryImage } from '../models/type-category.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -9,43 +10,58 @@ export class ImageService {
   private imageUrl = 'http://localhost:5000/images';
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
+  // Get all images
   public async getImages(): Promise<Image[]> {
     return (
       (await this.http.get<Image[]>(`${this.imageUrl}/`).toPromise()) || []
     );
   }
-  public async getImagesByProductId(id: number): Promise<ImageFile[]> {
-    const images = await this.getImages();
-    const imagesByProductId = images.filter(
-      (image) => image.idProduct.idProduct === id
-    );
-    return await Promise.all(
-      imagesByProductId.map(async (image) => ({
-        image: image,
-        file: await this.getImageFileById(image.idImage),
-      }))
-    );
-  }
-public async getImageFileById(id: number): Promise<string> {
+
+  // Get image by id
+  public async getImageFileById(id: number): Promise<Image> {
     const response = await this.http
-        .get(`${this.imageUrl}/file/${id}`, {
-            responseType: 'blob',
-            withCredentials: true,
-        })
-        .toPromise();
-    const file = response ? URL.createObjectURL(response) : '';
-    return this.sanitizer.bypassSecurityTrustUrl(file) as string;
-}
-  public async getOneImageByProductId(
-    id: number
-  ): Promise<ImageFile | undefined> {
-    const images = await this.getImages();
-    const imagesByProductId: Image[] =
-      images.filter((image) => image.idProduct.idProduct === id) || [];
-    if (imagesByProductId.length === 0) {
-      return undefined;
+      .get<Image>(`${this.imageUrl}/${id}`)
+      .toPromise();
+    if (!response) {
+      throw new Error('Image not found');
     }
-    const image = imagesByProductId[0];
-    return { image: image, file: await this.getImageFileById(image.idImage) };
+    const imageBlob = await fetch(
+      `data:image/jpeg;base64,${response.file}`
+    ).then((r) => r.blob());
+    response.file = URL.createObjectURL(imageBlob);
+    return response;
+  }
+
+  // Get image by product id
+  public async getImageByProductId(id: number): Promise<Image> {
+    const response = await this.http
+      .get<Image>(`${this.imageUrl}/product/${id}`)
+      .toPromise();
+    if (!response) {
+      throw new Error('Image not found');
+    }
+
+    const imageBlob = await fetch(
+      `data:image/jpeg;base64,${response.file}`
+    ).then((r) => r.blob());
+    response.file = URL.createObjectURL(imageBlob);
+    return response;
+  }
+
+  // Get image by category id
+  public async getImageByCategoryId(
+    category: Category
+  ): Promise<CategoryImage> {
+    const response = await this.http
+      .get<Image>(`${this.imageUrl}/category/${category.idCategory}`)
+      .toPromise();
+    if (!response) {
+      throw new Error('Image not found');
+    }
+    const imageBlob = await fetch(
+      `data:image/jpeg;base64,${response.file}`
+    ).then((r) => r.blob());
+    response.file = URL.createObjectURL(imageBlob);
+    return { category, image: response };
   }
 }

@@ -1,15 +1,15 @@
 import {
-  Category,
   Product,
   ProductImages,
   ProductOptions,
 } from 'src/app/models/type-product.model';
+import { Image } from 'src/app/models/type-image.model';
 import { ProductService } from 'src/app/services/product.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ImageService } from 'src/app/services/image.service';
-import { ImageFile } from 'src/app/models/type-image.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/models/type-category.model';
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
@@ -25,7 +25,7 @@ export class ListProductsComponent implements OnInit {
     min_price: null,
     max_price: null,
     search_query: null,
-    idCategory: "all",
+    idCategory: 'all',
   };
   public categories: Category[] = [];
   public total_items = 0;
@@ -65,7 +65,7 @@ export class ListProductsComponent implements OnInit {
   loadImages() {
     this.productImages.forEach((productImage) => {
       this._imageService
-        .getOneImageByProductId(productImage.product.idProduct)
+        .getImageByProductId(productImage.product.idProduct)
         .then((images) => {
           if (images) {
             productImage.images = [images];
@@ -85,15 +85,12 @@ export class ListProductsComponent implements OnInit {
     this.loadProducts();
   }
 
-  mockImage(product: Product): ImageFile {
+  mockImage(product: Product): Image {
     return {
-      image: {
-        idImage: 1,
-        path: 'https://placehold.co/600x400',
-        alt: 'Mock Image',
-        idProduct: product,
-      },
-      file: 'https://placehold.co/600x400',
+      idImage: 0,
+      alt: 'Image not found',
+      file: 'https://placehold.co/400',
+      idProduct: product,
     };
   }
   sortOrder(sort_order: 'asc' | 'desc'): void {
@@ -104,5 +101,8 @@ export class ListProductsComponent implements OnInit {
     const sort_by = event.target.value;
     this.productOptions.sort_by = sort_by;
     this.loadProducts();
+  }
+  resetPaginator() {
+    this.paginator.firstPage();
   }
 }
