@@ -67,7 +67,6 @@ export class ProductService {
       const image = await this._imageService.getImageByProductId(
         product.idProduct
       );
-      console.log(image);
       highlanders.push({
         product,
         images: [image],

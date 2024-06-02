@@ -1,3 +1,5 @@
 <app-menu></app-menu>
 <router-outlet></router-outlet>
-<app-home *ngIf="!isNotRootRoute()"></app-home>
+<app-home *ngIf="actualRoute == '/'" (idCategory)="onIdCategoryChange($event)"></app-home>
+<app-page-products *ngIf="actualRoute =='/products/list'"
+    [searchQuery]="searchQuery" [idCategory]="idCategory"></app-page-products>

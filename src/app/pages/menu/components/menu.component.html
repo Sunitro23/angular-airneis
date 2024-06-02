@@ -1,19 +1,27 @@
-<mat-toolbar color="primary" class="toolbar">
+<mat-toolbar id="main-toolbar"
+  class="w-full flex row justify-between items-center text-white h-75 fixed top-0 left-0">
   <a class="logo" routerLink="/">
-    <img
-      src
-      alt="Logo Airneis" />
+    <img src alt="Logo Airneis" />
   </a>
-  <!--Login Buttons-->
-  <div class="left">
-    <button class="button-toolbar" routerLink="/login" *ngIf="!isLogin">
-      Login
+  <!-- Search Bar -->
+  <div class="flex items-center w-1/2">
+    <input type="text" placeholder="Search a product"
+      [(ngModel)]="searchInput"
+      (keyup.enter)="onSearch()"
+      class="p-2 rounded-lg border w-1/2 border-gray-300 text-black text-base font-normal" />
+  </div>
+  <div class="left flex items-center justify-evenly">
+
+    <!-- Buttons -->
+    <button mat-button routerLink="/login" *ngIf="!isLogin">
+      <mat-icon>login</mat-icon> Login
     </button>
-    <button class="button-toolbar" (click)="logout()" *ngIf="isLogin">
-      Disconnect
+    <button mat-button (click)="logout()" *ngIf="isLogin">
+      <mat-icon>logout</mat-icon> Disconnect
     </button>
-    <button class="button-toolbar" routerLink="/register" *ngIf="!isLogin">
-      Register
+    <button id="register" mat-button routerLink="/register"
+      *ngIf="!isLogin">
+      <mat-icon>assignment</mat-icon> Register
     </button>
   </div>
 </mat-toolbar>

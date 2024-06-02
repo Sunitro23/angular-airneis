@@ -1,94 +1,101 @@
-<div class="toolbars top-html-part">
-    <mat-toolbar id="product_toolbar">
-        <div class="left-toolbar">
-            <!-- Input for search query -->
-            <mat-form-field appearance="outline" id="search">
-                <input matInput placeholder="Search" type="text"
-                    [(ngModel)]="productOptions.search_query"
+ <mat-toolbar id="sub-toolbar"
+    class="bg-white my-4 rounded shadow-lg h-full flex justify-center items-center responsive-toolbar">
+    <div class="w-full flex row justify-evenly items-center mt-4 md:mt-0">
+        <div class="flex row items-center" style="margin-top: 15px;">
+            <!-- Dropdown for sorting options -->
+            <mat-form-field appearance="outline"
+                class="max-w-44 p-2 mb-2 md:mb-0">
+                <mat-select
+                    (selectionChange)="loadProducts(); resetPaginator();"
+                    [(value)]="productOptions.sort_by">
+                    <mat-option value="price">Sort by Price</mat-option>
+                    <mat-option value="stock">Sort by Stock</mat-option>
+                    <mat-option value="date_published">Sort by
+                        Date</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- Dropdown for sorting order -->
+            <mat-form-field appearance="outline"
+                class="max-w-36 p-2 mb-2 md:mb-0">
+                <mat-select
+                    (selectionChange)="loadProducts(); resetPaginator();"
+                    [(value)]="productOptions.sort_order">
+                    <mat-option value="asc">Ascending</mat-option>
+                    <mat-option value="desc">Descending</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- Field for filtering by category -->
+            <mat-form-field appearance="outline"
+                class="max-w-44 p-2 mb-2 md:mb-0">
+                <mat-select
+                    (selectionChange)="loadProducts(); resetPaginator();"
+                    [(value)]="productOptions.idCategory">
+                    <mat-option value="all">All Categories</mat-option>
+                    <mat-option *ngFor="let category of categories"
+                        [value]="category.idCategory">
+                        {{ category.libelle }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- Field for minimal price -->
+            <mat-form-field appearance="outline"
+                class="max-w-36 p-2 mb-2 md:mb-0">
+                <input matInput placeholder="Min Price" type="number"
+                    [(ngModel)]="productOptions.min_price"
+                    (keyup.enter)="loadProducts(); resetPaginator();">
+            </mat-form-field>
+            <!-- Field for maximal price -->
+            <mat-form-field appearance="outline"
+                class="max-w-36 p-2 mb-2 md:mb-0">
+                <input matInput placeholder="Max Price" type="number"
+                    [(ngModel)]="productOptions.max_price"
                     (keyup.enter)="loadProducts(); resetPaginator();">
             </mat-form-field>
         </div>
-
         <!-- Paginator for pagination -->
         <mat-paginator [length]="total_items" [pageSize]="10"
             [pageSizeOptions]="[5, 10, 25, 100]"
-            (page)="onPageChange($event)" [disabled]="isLoadingProducts">
+            (page)="onPageChange($event)" [disabled]="isLoadingProducts"
+            class="flex row flex-nowrap mt-4 md:mt-0">
         </mat-paginator>
-    </mat-toolbar>
-    <mat-toolbar id="sub-toolbar">
-        <!-- Dropdown for sorting options -->
-        <mat-form-field appearance="outline">
-            <mat-select (selectionChange)="loadProducts(); resetPaginator();"
-                [(value)]="productOptions.sort_by">
-                <mat-option value="price">Sort by Price</mat-option>
-                <mat-option value="stock">Sort by Stock</mat-option>
-                <mat-option value="date_published">Sort by Date</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <!-- Dropdown for sorting order -->
-        <mat-form-field appearance="outline">
-            <mat-select (selectionChange)="loadProducts(); resetPaginator();"
-                [(value)]="productOptions.sort_order">
-                <mat-option value="asc">Ascending</mat-option>
-                <mat-option value="desc">Descending</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <!-- Field for filtering by category -->
-        <mat-form-field appearance="outline">
-            <mat-select (selectionChange)="loadProducts(); resetPaginator();"
-                [(value)]="productOptions.idCategory">
-                <mat-option value="all">All Categories</mat-option>
-                <mat-option *ngFor="let category of categories"
-                    [value]="category.idCategory">
-                    {{ category.libelle }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <!-- Field for minimal price -->
-        <mat-form-field appearance="outline">
-            <input matInput placeholder="Min Price" type="number"
-                [(ngModel)]="productOptions.min_price"
-                (keyup.enter)="loadProducts(); resetPaginator();">
-        </mat-form-field>
-        <!-- Field for maximal price -->
-        <mat-form-field appearance="outline">
-            <input matInput placeholder="Max Price" type="number"
-                [(ngModel)]="productOptions.max_price"
-                (keyup.enter)="loadProducts(); resetPaginator();">
-        </mat-form-field>
-    </mat-toolbar>
-</div>
-<!-- Container for product grid -->
-<div class="product-grid">
-    <!-- Card for each product -->
-    <mat-card *ngFor="let product of productImages" class="mat-card_product">
-        <mat-card-title>
+    </div>
+
+</mat-toolbar>
+<!-- Grid for displaying products -->
+<div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <mat-card *ngFor="let product of productImages"
+        class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <mat-card-title class="p-4">
             <!-- Product image -->
-            <div class="img-container">
-                <img mat-card-image [src]="product.images[0].file"
-                    alt="{{ product.images[0].alt }}">
-            </div>
+            <img mat-card-image [src]="product.images[0].file"
+                alt="{{ product.images[0].alt }}"
+                class="rounded-lg h-40 w-full object-cover">
             <!-- Product name -->
-            <div class="name_cat">
-                <h1 class="name">
-                    {{ product.product.name.charAt(0).toUpperCase()+
-                    product.product.name.slice(1) }}
-                </h1>
+            <div class="name_cat h-1/2">
+                <h1 class="text-xl font-bold">{{
+                    product.product.name.charAt(0).toUpperCase()+
+                    product.product.name.slice(1) }}</h1>
                 <!-- Product category -->
-                <p class="category">{{product.product.idCategory.libelle}}</p>
+                <p
+                    class="text-gray-500">{{product.product.idCategory.libelle}}</p>
             </div>
         </mat-card-title>
-        <mat-card-content>
+        <mat-card-content class="p-4">
             <!-- Product price -->
-            <p class="price">{{ product.product.price }}$</p>
+            <p class="text-lg font-bold">{{ product.product.price
+                }}$</p>
             <!-- Product description -->
-            <p class="description">{{ product.product.description }}</p>
-            <div class="stock_date">
+            <p class="text-gray-700 truncate">{{
+                product.product.description }}</p>
+            <div class="flex justify-between items-center mt-4">
                 <!-- Product stock -->
-                <p class="stock">Stock: {{ product.product.stock }}</p>
+                <p class="text-gray-500">Stock: {{ product.product.stock
+                    }}</p>
                 <!-- Product date published -->
-                <p class="date"> {{ product.product.date_published | date:
-                    'dd/MM/yyyy' }}</p>
+                <p class="text-gray-500">{{
+                    product.product.date_published |
+                    date: 'dd/MM/yyyy' }}</p>
             </div>
         </mat-card-content>
     </mat-card>

@@ -5,17 +5,20 @@ import {
 } from 'src/app/models/type-product.model';
 import { Image } from 'src/app/models/type-image.model';
 import { ProductService } from 'src/app/services/product.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ImageService } from 'src/app/services/image.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/type-category.model';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
   styleUrls: ['./list-products.component.scss'],
 })
 export class ListProductsComponent implements OnInit {
+  @Input() searchQuery!: string | null;
+  @Input() idCategory!: string | number;
   public productImages: ProductImages[] = [];
   public productOptions: ProductOptions = {
     page: 1,
@@ -37,10 +40,13 @@ export class ListProductsComponent implements OnInit {
   constructor(
     private _productService: ProductService,
     private _imageService: ImageService,
-    private _categoryService: CategoryService
+    private _categoryService: CategoryService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.productOptions.search_query = this.searchQuery;
+    this.productOptions.idCategory = this.idCategory;
     this.loadProducts();
     this.loadCategories();
   }

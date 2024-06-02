@@ -19,7 +19,6 @@ export class CategoryService {
     const response = await this.http
       .get<Category[]>(`${this.categoryUrl}`)
       .toPromise();
-    console.log(response);
     return response || [];
   }
   public async getCategoryById(idCategory: number): Promise<Category> {

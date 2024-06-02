@@ -1,46 +1,53 @@
-<mat-card class="top-html-part">
-  <div class="header">
-    <!--Carousel-->
-    <div class="carousel">
-      <owl-carousel-o [options]="customOptions">
-        <ng-container *ngFor="let slide of slidesStore">
-          <ng-template carouselSlide>
-            <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
-          </ng-template>
-        </ng-container>
-      </owl-carousel-o>
-      <mat-card-content>
+<div class="body">
+  <mat-card class="p-4 w-full">
+    <div class="flex-row-to-col">
+      <!--Carousel-->
+      <div class="w-1/2 px-4 full-width-mobile">
         <h1>OUR SELECTION</h1>
-      </mat-card-content>
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let slide of slidesStore">
+            <ng-template carouselSlide>
+              <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title">
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+        <mat-card-content>
+        </mat-card-content>
+      </div>
+      <!--Category Grid-->
+      <div class="w-1/2 full-width-mobile">
+        <h1 class="px-4">CATEGORIES</h1>
+        <mat-card-content>
+          <mat-grid-list cols="3">
+            <mat-grid-tile *ngFor="let category of categories_image"
+              class="rounded hover:animate-pulse">
+              <img [src]="category.image.file"
+                [alt]="category.category.libelle"
+                class="w-full h-full object-cover rounded transition-transform duration-300 transform hover:scale-110"
+                (click)="onIdCategoryChange(category.category.idCategory)">
+              <mat-grid-tile-footer>
+                {{ category.category.libelle}}
+              </mat-grid-tile-footer>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card-content>
+      </div>
     </div>
-    <!--Category Grid-->
-    <div class="categories">
+    <!--Product Grid-->
+    <div>
+      <h2 class="px-4">Highlanders of the moment</h2>
       <mat-card-content>
-        <h2>Categories</h2>
-        <mat-grid-list cols="3" rowHeight="200px">
-          <mat-grid-tile *ngFor="let category of categories_image">
-            <img [src]="category.image.file" [alt]="category.category.libelle">
+        <mat-grid-list cols="4">
+          <mat-grid-tile *ngFor="let product of highlanders" class="rounded">
+            <img [src]="product.images[0].file"
+              [alt]="product.images[0].alt"
+              class="w-full h-full object-cover rounded transition-transform duration-300 transform hover:scale-110">
             <mat-grid-tile-footer>
-              {{ category.category.libelle}}
+              {{ product.product.name }}
             </mat-grid-tile-footer>
           </mat-grid-tile>
         </mat-grid-list>
       </mat-card-content>
     </div>
-  </div>
-  <!--Product Grid-->
-  <div class="product-grid">
-    <h2>Highlanders of the moment</h2>
-    <mat-card-content>
-      <mat-grid-list cols="4" rowHeight="250px">
-        <mat-grid-tile *ngFor="let product of highlanders">
-          <img [src]="product.images[0].file"
-            [alt]="product.images[0].alt">
-          <mat-grid-tile-footer>
-            {{ product.product.name }}
-          </mat-grid-tile-footer>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-card-content>
-  </div>
-</mat-card>
+  </mat-card>
+</div>

@@ -7,14 +7,20 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   constructor(private router: Router) {}
-
+  actualRoute = this.router.url;
+  searchQuery: string | null = null;
+  idCategory: number | string = 'all';
   title = 'AIRNEIS';
 
   ngOnInit() {}
   goToLink(url: string) {
     window.open(url, '_blank');
   }
-  isNotRootRoute() {
-    return this.router.url !== '/';
+  onSearchQueryChange(searchQuery: any) {
+    this.searchQuery = searchQuery;
+  }
+
+  onIdCategoryChange(idCategory: any) {
+    this.idCategory = idCategory;
   }
 }

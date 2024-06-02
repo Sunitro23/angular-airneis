@@ -92,7 +92,12 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              {
+                "input": "src/styles.scss",
+                "bundleName": "styles",
+                "inject": true
+              }
             ],
             "scripts": []
           }
