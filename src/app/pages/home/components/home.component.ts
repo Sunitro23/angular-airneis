@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CategoryImage } from 'src/app/models/type-category.model';
 import { Product, ProductImages } from 'src/app/models/type-product.model';
@@ -14,7 +14,10 @@ import { ProductService } from 'src/app/services/product.service';
 export class HomeComponent implements OnInit {
   categories_image: CategoryImage[] = [];
   highlanders: ProductImages[] = [];
-  @Output() idCategory: string | number = 'all';
+  idCategory: string | number = 'all';
+  @Output() idCategoryChange: EventEmitter<string | number> = new EventEmitter<
+    string | number
+  >();
 
   constructor(
     private _categoryService: CategoryService,
@@ -40,8 +43,10 @@ export class HomeComponent implements OnInit {
       this.highlanders = data;
     });
   }
+
   onIdCategoryChange(idCategory: any): void {
-    return this.idCategory = idCategory;
+    this.idCategory = idCategory;
+    this.idCategoryChange.emit(this.idCategory);
   }
   slidesStore = [
     {
