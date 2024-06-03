@@ -5,12 +5,18 @@ import {
 } from 'src/app/models/type-product.model';
 import { Image } from 'src/app/models/type-image.model';
 import { ProductService } from 'src/app/services/product.service';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ImageService } from 'src/app/services/image.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/type-category.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 @Component({
   selector: 'app-list-products',
   templateUrl: './list-products.component.html',
@@ -41,9 +47,14 @@ export class ListProductsComponent implements OnInit {
     private _productService: ProductService,
     private _imageService: ImageService,
     private _categoryService: CategoryService,
-    private route: ActivatedRoute
+    private _route: Router
   ) {}
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchQuery']) {
+      this.productOptions.search_query = this.searchQuery;
+      this.loadProducts();
+    }
+  }
   ngOnInit(): void {
     this.productOptions.search_query = this.searchQuery;
     this.productOptions.idCategory = this.idCategory;
@@ -110,5 +121,8 @@ export class ListProductsComponent implements OnInit {
   }
   resetPaginator() {
     this.paginator.firstPage();
+  }
+  redirectToProduct(idProduct: number): void {
+    this._route.navigate(['/products', idProduct]);
   }
 }

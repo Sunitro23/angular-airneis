@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Product, ProductImages } from 'src/app/models/type-product.model';
 
 @Component({
   selector: 'app-page-products',

@@ -14,7 +14,7 @@ export interface Product {
   description: string;
   stock: number;
   date_published: Date;
-  idCategory: Category;
+  Category: Category;
 }
 
 export interface ProductInput {

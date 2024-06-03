@@ -13,6 +13,18 @@ import { ImageService } from './image.service';
   providedIn: 'root',
 })
 export class ProductService {
+  mockProduct: Product = {
+    idProduct: 0,
+    name: '',
+    price: 0,
+    description: '',
+    stock: 0,
+    date_published: new Date(),
+    Category: {
+      idCategory: 0,
+      libelle: '',
+    },
+  };
   private productUrl = 'http://localhost:5000/products';
 
   constructor(private http: HttpClient, private _imageService: ImageService) {}
@@ -73,5 +85,23 @@ export class ProductService {
       });
     }
     return highlanders;
+  }
+  public async getProductById(
+    idProduct: number | null
+  ): Promise<ProductImages> {
+    if (!idProduct) {
+      return {
+        product: this.mockProduct,
+        images: [],
+      };
+    }
+    const response = await this.http
+      .get<Product>(`${this.productUrl}/${idProduct}`)
+      .toPromise();
+    const image = await this._imageService.getImageByProductId(idProduct);
+    return {
+      product: response || this.mockProduct,
+      images: [image],
+    };
   }
 }

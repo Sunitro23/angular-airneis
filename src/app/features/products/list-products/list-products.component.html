@@ -63,40 +63,41 @@
 </mat-toolbar>
 <!-- Grid for displaying products -->
 <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    <mat-card *ngFor="let product of productImages"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <div *ngFor="let product of productImages"
         class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <mat-card-title class="p-4">
-            <!-- Product image -->
-            <img mat-card-image [src]="product.images[0].file"
-                alt="{{ product.images[0].alt }}"
-                class="rounded-lg h-40 w-full object-cover">
-            <!-- Product name -->
-            <div class="name_cat h-1/2">
-                <h1 class="text-xl font-bold">{{
-                    product.product.name.charAt(0).toUpperCase()+
-                    product.product.name.slice(1) }}</h1>
-                <!-- Product category -->
-                <p
-                    class="text-gray-500">{{product.product.idCategory.libelle}}</p>
-            </div>
-        </mat-card-title>
-        <mat-card-content class="p-4">
-            <!-- Product price -->
-            <p class="text-lg font-bold">{{ product.product.price
-                }}$</p>
-            <!-- Product description -->
-            <p class="text-gray-700 truncate">{{
-                product.product.description }}</p>
-            <div class="flex justify-between items-center mt-4">
-                <!-- Product stock -->
-                <p class="text-gray-500">Stock: {{ product.product.stock
+        <mat-card class="hover" (click)="redirectToProduct(product.product.idProduct)">
+            <mat-card-title class="p-4 h-2/3">
+                <!-- Product image -->
+                <img mat-card-image [src]="product.images[0].file"
+                    alt="{{ product.images[0].alt }}"
+                    class="rounded-lg h-40 w-full object-cover h-3/4 pb-4">
+                <!-- Product name -->
+                <div class="h-1/4">
+                    <h1 class="text-xl font-bold">{{
+                        product.product.name.charAt(0).toUpperCase()+
+                        product.product.name.slice(1) }}</h1>
+                    <!-- Product category -->
+                    <p
+                        class="text-gray-500">{{product.product.Category.libelle}}</p>
+                </div>
+            </mat-card-title>
+            <mat-card-content class="p-4 h-1/3">
+                <!-- Product price -->
+                <p class="text-lg font-bold">{{ product.product.price }}$</p>
+                <!-- Product description -->
+                <p class="text-gray-700 truncate">{{ product.product.description
                     }}</p>
-                <!-- Product date published -->
-                <p class="text-gray-500">{{
-                    product.product.date_published |
-                    date: 'dd/MM/yyyy' }}</p>
-            </div>
-        </mat-card-content>
-    </mat-card>
+                <div class="flex justify-between items-center mt-4">
+                    <!-- Product stock -->
+                    <p class="text-gray-500">Stock: {{ product.product.stock
+                        }}</p>
+                    <!-- Product date published -->
+                    <p class="text-gray-500">{{
+                        product.product.date_published |
+                        date: 'dd/MM/yyyy' }}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

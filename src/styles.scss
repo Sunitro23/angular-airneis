@@ -43,7 +43,7 @@ html {
   top: 50%;
   transform: translateY(-50%);
 }
-.owl-theme .owl-nav [class*=owl-] {
+.owl-theme .owl-nav [class*="owl-"] {
   background: #3f51b5;
 }
 .owl-prev {
@@ -81,10 +81,22 @@ html {
     width: 100%;
   }
 }
-.flex-row-to-col{
+.flex-row-to-col {
   display: flex;
   flex-direction: row;
   @media (max-width: 767px) {
     flex-direction: column;
   }
+}
+.mat-h1,
+.mat-headline-5,
+.mat-typography .mat-h1,
+.mat-typography .mat-headline-5,
+.mat-typography h1,
+.mat-body p,
+.mat-body-2 p,
+.mat-typography .mat-body p,
+.mat-typography .mat-body-2 p,
+.mat-typography p {
+  margin: 0;
 }

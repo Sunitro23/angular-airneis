@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CategoryImage } from 'src/app/models/type-category.model';
 import { Product, ProductImages } from 'src/app/models/type-product.model';
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private _categoryService: CategoryService,
     private _productService: ProductService,
-    private _imageService: ImageService
+    private _imageService: ImageService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class HomeComponent implements OnInit {
   onIdCategoryChange(idCategory: any): void {
     this.idCategory = idCategory;
     this.idCategoryChange.emit(this.idCategory);
+    this._router.navigate(['/products']);
   }
   slidesStore = [
     {

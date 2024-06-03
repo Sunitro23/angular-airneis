@@ -1,0 +1,28 @@
+<div class="body">
+    <div class="flex flex-row">
+        <mat-card class="md:w-1/2">
+            <mat-card-content>
+                <img src="{{ product.images[0].file }}" alt="Product Image"
+                    class="w-full">
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="md:w-1/2">
+            <mat-card-header>
+                <mat-card-title class="mb-4 text-2xl">{{ product.product.name |
+                    uppercase }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="mb-2"><strong>Price:</strong> {{ product.product.price
+                    }}</p>
+                <p class="mb-2"><strong>Description:</strong> {{
+                    product.product.description }}</p>
+                <p class="mb-2"><strong>Stock:</strong> {{ product.product.stock
+                    }}</p>
+                <p class="mb-2"><strong>Date Published:</strong> {{
+                    product.product.date_published | date }}</p>
+                <p class="mb-2"><strong>Category:</strong> {{
+                    product.product.Category.libelle }}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

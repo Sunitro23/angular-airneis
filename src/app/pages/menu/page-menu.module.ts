@@ -31,6 +31,7 @@ import { RouterModule } from '@angular/router';
     MatFormFieldModule,
     FormsModule,
     MatButtonModule,
+    MatSidenavModule,
     MatInputModule,
   ],
   exports: [MenuComponent],

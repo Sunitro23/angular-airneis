@@ -12,8 +12,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListProductsComponent } from 'src/app/features/products/list-products/list-products.component';
 import { OneProductComponent } from 'src/app/features/products/one-product/one-product.component';
 import { PageProductsComponent } from './components/page-products.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 const routes: Routes = [
-  { path: 'products/list', component: PageProductsComponent },
+  { path: 'products', component: PageProductsComponent },
   { path: 'products/:id', component: OneProductComponent },
 ];
 
@@ -32,6 +33,7 @@ const routes: Routes = [
     MatSelectModule,
     FormsModule,
     MatInputModule,
+    MatGridListModule,
     RouterModule.forChild(routes),
   ],
   providers: [ProductService],

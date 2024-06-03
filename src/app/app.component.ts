@@ -20,8 +20,11 @@ export class AppComponent {
   onSearchQueryChange(searchQuery: any) {
     this.searchQuery = searchQuery;
   }
-
   onIdCategoryChange(idCategory: any) {
     this.idCategory = idCategory;
+  }
+  verifyRoute(route: string): boolean {
+    this.actualRoute = this.router.url;
+    return this.actualRoute === route;
   }
 }
