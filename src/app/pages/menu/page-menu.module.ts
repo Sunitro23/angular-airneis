@@ -33,6 +33,8 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatSidenavModule,
     MatInputModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   exports: [MenuComponent],
 })

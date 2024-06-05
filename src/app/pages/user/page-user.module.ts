@@ -15,11 +15,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Routes } from '@angular/router';
 import { OrdersComponent } from '../orders/components/orders.component';
-import { LoginGuard } from 'src/app/services/guards/login.guard';
 import { DialogCartComponent } from '../orders/dialog-cart/dialog-cart.component';
 const routes: Routes = [
-  { path: '', component: UserComponent, canActivate: [LoginGuard] },
-  { path: 'orders', component: OrdersComponent, canActivate: [LoginGuard] },
+  { path: '', component: UserComponent },
+  { path: 'orders', component: OrdersComponent },
 ];
 @NgModule({
   declarations: [UserComponent, OrdersComponent, DialogCartComponent],

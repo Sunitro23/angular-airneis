@@ -1,5 +1,6 @@
 <app-menu (searchQueryChange)="onSearchQueryChange($event)"></app-menu>
-<router-outlet></router-outlet>
-<app-home *ngIf="verifyRoute('/')" (idCategoryChange)="onIdCategoryChange($event)"></app-home>
+<app-home *ngIf="verifyRoute('/')"
+    (idCategoryChange)="onIdCategoryChange($event)"></app-home>
 <app-page-products *ngIf="verifyRoute('/products')" [searchQuery]="searchQuery"
     [idCategory]="idCategory"></app-page-products>
+<router-outlet></router-outlet>

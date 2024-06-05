@@ -1,31 +1,71 @@
-<mat-toolbar id="main-toolbar" class="w-full flex row justify-between items-center text-white h-75 fixed top-0 left-0">
-  <a class="logo" routerLink="/">
-    <img src alt="Logo Airneis" />
+<!-- PC Menu -->
+<mat-toolbar id="main-toolbar"
+  class="w-full flex row justify-between items-center text-white h-75 fixed top-0 left-0">
+  <a class="mobile" (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
   </a>
+  <div class="wide-screen">
+    <div class="left flex items-center justify-evenly">
+      <!-- Buttons -->
+      <button mat-button routerLink="/" routerLinkActive="active">
+        <mat-icon>home</mat-icon> Home
+      </button>
+      <button mat-button routerLink="/products">
+        <mat-icon>store</mat-icon> Products
+      </button>
+      <button mat-button routerLink="/user" *ngIf="isLogin">
+        <mat-icon>account_circle</mat-icon> Account
+      </button>
+      <button mat-button routerLink="/cart" *ngIf="isLogin">
+        <mat-icon>shopping_cart</mat-icon> Cart
+      </button>
+      <button mat-button routerLink="/login" *ngIf="!isLogin">
+        <mat-icon>login</mat-icon> Login
+      </button>
+      <button mat-button (click)="logout()" *ngIf="isLogin">
+        <mat-icon>logout</mat-icon> Disconnect
+      </button>
+      <button id="register" mat-button routerLink="/register"
+        *ngIf="!isLogin">
+        <mat-icon>assignment</mat-icon> Register
+      </button>
+    </div>
+  </div>
   <!-- Search Bar -->
-  <div class="flex items-center w-1/2">
-    <input type="text" placeholder="Search a product" [(ngModel)]="searchInput" (keyup.enter)="onSearch()"
+  <div id="search-bar">
+    <input type="text" placeholder="Search a product"
+      [(ngModel)]="searchInput"
+      (keyup.enter)="onSearch()"
       class="p-2 rounded-lg border w-1/2 border-gray-300 text-black text-base font-normal" />
   </div>
-  <div class="left flex items-center justify-evenly">
-    <!-- Buttons -->
-    <button mat-button routerLink="/products">
-      <mat-icon>store</mat-icon> Products
-    </button>
-    <button mat-button routerLink="/user" *ngIf="isLogin">
-      <mat-icon>account_circle</mat-icon> Account
-    </button>
-    <button mat-button routerLink="/cart" *ngIf="isLogin">
-      <mat-icon>shopping_cart</mat-icon> Cart
-    </button>
-    <button mat-button routerLink="/login" *ngIf="!isLogin">
-      <mat-icon>login</mat-icon> Login
-    </button>
-    <button mat-button (click)="logout()" *ngIf="isLogin">
-      <mat-icon>logout</mat-icon> Disconnect
-    </button>
-    <button id="register" mat-button routerLink="/register" *ngIf="!isLogin">
-      <mat-icon>assignment</mat-icon> Register
-    </button>
-  </div>
+
 </mat-toolbar>
+<!-- Mobile Menu -->
+<mat-sidenav-container id="sidenavContainer" class="mobile"
+  [ngClass]="{'opened': isOpened}">
+  <mat-sidenav #sidenav mode="side" opened="true" class="bg-gray-800">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" routerLinkActive="active">
+        <mat-icon>home</mat-icon> Home
+      </a>
+      <a mat-list-item routerLink="/products">
+        <mat-icon>store</mat-icon> Products
+      </a>
+      <a mat-list-item routerLink="/user" *ngIf="isLogin">
+        <mat-icon>account_circle</mat-icon> Account
+      </a>
+      <a mat-list-item routerLink="/cart" *ngIf="isLogin">
+        <mat-icon>shopping_cart</mat-icon> Cart
+      </a>
+      <a mat-list-item routerLink="/login" *ngIf="!isLogin">
+        <mat-icon>login</mat-icon> Login
+      </a>
+      <a mat-list-item (click)="logout()" *ngIf="isLogin">
+        <mat-icon>logout</mat-icon> Disconnect
+      </a>
+      <a mat-list-item routerLink="/register" *ngIf="!isLogin">
+        <mat-icon>assignment</mat-icon> Register
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>

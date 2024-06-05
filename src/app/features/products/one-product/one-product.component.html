@@ -23,7 +23,7 @@
                 product.product.date_published | date }}</p>
             <p class="mb-2"><strong>Category:</strong> {{
                 product.product.Category.libelle }}</p>
-            <button mat-raised-button color="primary" (click)="addProductToCart()">
+            <button mat-raised-button color="primary" (click)="addProductToCart()" *ngIf="isLogin">
                 Add to Cart
             </button>
         </mat-card-content>

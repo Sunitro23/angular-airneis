@@ -100,3 +100,34 @@ html {
 .mat-typography p {
   margin: 0;
 }
+#sidenavContainer {
+  top: 0;
+  width: 100%;
+  margin-top: 55px;
+  position: fixed;
+  height: 100%;
+  background: transparent;
+  .mdc-list-item__primary-text {
+    color: white !important;
+  }
+}
+
+mat-sidenav-container {
+  z-index: -1000 !important;
+}
+mat-sidenav-container.opened {
+  z-index: 1000 !important;
+}
+.wide-screen {
+  display: none;
+  @media only screen and (min-width: 768px) {
+    display: flex;
+  }
+}
+
+.mobile {
+  display: flex;
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
+}

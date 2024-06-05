@@ -7,6 +7,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MyDialogComponent } from '../dialog-added/dialog-added.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-one-product',
@@ -14,6 +15,7 @@ import { MyDialogComponent } from '../dialog-added/dialog-added.component';
   styleUrls: ['./one-product.component.scss'],
 })
 export class OneProductComponent implements OnInit {
+  public isLogin: boolean = false;
   productId!: number | null;
   product: ProductImages = {
     product: this.createMockProduct(),
@@ -23,10 +25,12 @@ export class OneProductComponent implements OnInit {
     private route: ActivatedRoute,
     private _productService: ProductService,
     private _cartService: CartService,
+    private _serviceUser: UserService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    this.isLogin = this._serviceUser.isLogin();
     const id = this.route.snapshot.paramMap.get('id');
     this.productId = id !== null ? parseInt(id) : null;
     this.loadProduct();
@@ -37,6 +41,7 @@ export class OneProductComponent implements OnInit {
     });
   }
   addProductToCart(): void {
+    if (this.product.product.idProduct === 0) return;
     this._cartService.addProductToCart(this.product.product);
     this.openDialog();
   }

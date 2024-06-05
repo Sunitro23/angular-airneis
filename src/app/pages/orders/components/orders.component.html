@@ -9,8 +9,12 @@
           <div class="col-span-1 truncate"><strong>Total Price</strong></div>
         </div>
       </mat-list-item>
+      <mat-list-item *ngIf="orders.length === 0">
+        <div class="text-center">No orders available.</div>
+      </mat-list-item>
       <mat-list-item *ngFor="let order of orders">
-        <div class="grid grid-cols-4 h-full hover" (click)="openCartDialog(order)">
+        <div class="grid grid-cols-4 h-full hover"
+          (click)="openCartDialog(order)">
           <div class="col-span-1 truncate">{{ order.idOrder }}</div>
           <div class="col-span-1 truncate">{{ order.paymentMethod }}</div>
           <div class="col-span-1 truncate">{{ order.status }}</div>
