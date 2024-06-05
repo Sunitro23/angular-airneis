@@ -13,9 +13,12 @@ import { ListProductsComponent } from 'src/app/features/products/list-products/l
 import { OneProductComponent } from 'src/app/features/products/one-product/one-product.component';
 import { PageProductsComponent } from './components/page-products.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { MyDialogComponent } from 'src/app/features/products/dialog-added/dialog-added.component';
+import { MatDialogModule } from '@angular/material/dialog';
 const routes: Routes = [
   { path: 'products', component: PageProductsComponent },
-  { path: 'products/:id', component: OneProductComponent },
+  { path: 'products/:id', component: PageProductsComponent },
 ];
 
 @NgModule({
@@ -23,6 +26,7 @@ const routes: Routes = [
     ListProductsComponent,
     OneProductComponent,
     PageProductsComponent,
+    MyDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +39,8 @@ const routes: Routes = [
     MatInputModule,
     MatGridListModule,
     RouterModule.forChild(routes),
+    CarouselModule,
+    MatDialogModule,
   ],
   providers: [ProductService],
   exports: [PageProductsComponent],

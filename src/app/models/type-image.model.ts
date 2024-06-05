@@ -4,5 +4,5 @@ export interface Image {
   idImage: number;
   alt: string;
   file: string;
-  idProduct: Product;
+  Product: Product;
 }

@@ -1,4 +1,2 @@
-<div class="body">
-    <app-list-products [idCategory]="idCategory"
-        [searchQuery]="searchQuery"></app-list-products>
-</div>
+<app-list-products *ngIf="verifyRoute('/products')" [idCategory]="idCategory" [searchQuery]="searchQuery"></app-list-products>
+<app-one-product *ngIf="verifyRoute('/products/')"></app-one-product>

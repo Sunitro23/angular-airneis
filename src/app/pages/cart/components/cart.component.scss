@@ -1,0 +1,12 @@
+#horizontal-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#card-center {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

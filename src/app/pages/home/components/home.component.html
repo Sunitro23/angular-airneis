@@ -41,7 +41,8 @@
           <mat-grid-tile *ngFor="let product of highlanders" class="rounded">
             <img [src]="product.images[0].file"
               [alt]="product.images[0].alt"
-              class="w-full h-full object-cover rounded transition-transform duration-300 transform hover:scale-110">
+              class="w-full h-full object-cover rounded transition-transform duration-300 transform hover:scale-110"
+              (click)="navigateToProductDetail(product.product)">
             <mat-grid-tile-footer>
               {{ product.product.name }}
             </mat-grid-tile-footer>

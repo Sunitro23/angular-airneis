@@ -1,0 +1,49 @@
+<div class="body" *ngIf="isRouteCart()">
+    <mat-card id='card-center' class="my-4 flex row">
+        <mat-card-title class="p-4 justify-center ">
+            <h1 class="text-2xl font-bold">{{getCurrentUser()?.firstName}}'s Cart</h1>
+        </mat-card-title>
+        <mat-card-content id="horizontal-card" class="w-full flex row justify-center">
+            <p class="mx-4 ">{{ totalItems }} products in your cart</p>
+            <button mat-raised-button color="primary" (click)="createOrder()" class="mx-4">Take an order</button>
+        </mat-card-content>
+    </mat-card>
+
+    <ul *ngIf="cart">
+        <li *ngFor="let product of products">
+            <mat-card class="flex row h-1/2" id="horizontal-card">
+                <mat-card-content class="w-1/3">
+                    <!-- Product image -->
+                    <div>
+                        <img mat-card-image [src]="product.images[0].file" alt="{{ product.images[0].alt }}">
+                    </div>
+                </mat-card-content>
+                <mat-card-title class="w-2/3">
+                    <!-- Product name and content -->
+                    <div>
+                        <!-- Product name -->
+                        <h1 class="text-xl font-bold">
+                            {{ product.product.name.charAt(0).toUpperCase() + product.product.name.slice(1) }}
+                        </h1>
+                        <!-- Product content -->
+                        <div class="text-lg">{{ product.product.price }}$</div>
+                        <p class="text-sm">{{ product.product.description }}</p>
+                        <div>
+                            <p class="text-sm">Stock: {{ product.product.stock }}</p>
+                            <p class="text-sm">{{ product.product.date_published | date: 'dd/MM/yyyy' }}</p>
+                            <!-- Product quantity -->
+                            <p class="text-sm">Quantity: {{ productQuantities[product.product.idProduct] }}</p>
+                        </div>
+                        <!-- Delete buttons -->
+                        <div>
+                            <button mat-button color="warn" class="text-red-500 px-2 py-1"
+                                (click)="deleteProduct(product.product.idProduct)">Delete</button>
+                            <button mat-button color="warn" class="text-red-500 px-2 py-1"
+                                (click)="deleteAllProducts(product.product.idProduct)">Delete All</button>
+                        </div>
+                    </div>
+                </mat-card-title>
+            </mat-card>
+        </li>
+    </ul>
+</div>

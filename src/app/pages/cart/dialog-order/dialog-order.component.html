@@ -1,0 +1,26 @@
+<mat-card class="p-6 bg-gray-100 w-full">
+    <mat-card-content class="">
+        <form>
+            <div class="flex flex-col">
+                <mat-label class="text-lg font-bold text-gray-700">Payment Method</mat-label>
+                <mat-form-field class="bg-white rounded-md shadow">
+                    <mat-label>Payment Method</mat-label>
+                    <mat-select [(ngModel)]="paymentMethod" name="paymentMethod">
+                        <mat-option *ngFor="let method of allPaymentMethods" [value]="method">{{ method }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-col">
+                <mat-label class="text-lg font-bold text-gray-700">Address</mat-label>
+                <mat-form-field class="bg-white rounded-md shadow">
+                    <input matInput placeholder="Address" [(ngModel)]="address" name="address" class="p-2">
+                </mat-form-field>
+            </div>
+
+            <button mat-raised-button color="primary" type="submit"
+                class="w-full py-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-600"
+                (click)="createOrder()">Submit</button>
+        </form>
+    </mat-card-content>
+</mat-card>

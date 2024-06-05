@@ -1,29 +1,31 @@
-<mat-toolbar id="main-toolbar"
-  class="w-full flex row justify-between items-center text-white h-75 fixed top-0 left-0">
+<mat-toolbar id="main-toolbar" class="w-full flex row justify-between items-center text-white h-75 fixed top-0 left-0">
   <a class="logo" routerLink="/">
     <img src alt="Logo Airneis" />
   </a>
   <!-- Search Bar -->
   <div class="flex items-center w-1/2">
-    <input type="text" placeholder="Search a product"
-      [(ngModel)]="searchInput"
-      (keyup.enter)="onSearch()"
+    <input type="text" placeholder="Search a product" [(ngModel)]="searchInput" (keyup.enter)="onSearch()"
       class="p-2 rounded-lg border w-1/2 border-gray-300 text-black text-base font-normal" />
   </div>
   <div class="left flex items-center justify-evenly">
-
     <!-- Buttons -->
+    <button mat-button routerLink="/products">
+      <mat-icon>store</mat-icon> Products
+    </button>
+    <button mat-button routerLink="/user" *ngIf="isLogin">
+      <mat-icon>account_circle</mat-icon> Account
+    </button>
+    <button mat-button routerLink="/cart" *ngIf="isLogin">
+      <mat-icon>shopping_cart</mat-icon> Cart
+    </button>
     <button mat-button routerLink="/login" *ngIf="!isLogin">
       <mat-icon>login</mat-icon> Login
     </button>
     <button mat-button (click)="logout()" *ngIf="isLogin">
       <mat-icon>logout</mat-icon> Disconnect
     </button>
-    <button id="register" mat-button routerLink="/register"
-      *ngIf="!isLogin">
+    <button id="register" mat-button routerLink="/register" *ngIf="!isLogin">
       <mat-icon>assignment</mat-icon> Register
     </button>
   </div>
 </mat-toolbar>
-
-<router-outlet></router-outlet>

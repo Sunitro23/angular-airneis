@@ -1,0 +1,17 @@
+<div class="body">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{user.firstName}} {{user.lastName}} Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Last Name: {{user.lastName}}</p>
+      <p>First Name: {{user.firstName}}</p>
+      <p>Street: {{user.street}}</p>
+      <p>Zip Code: {{user.zipCode}}</p>
+      <p>City: {{user.city}}</p>
+      <p>Phone: {{user.phone}}</p>
+      <p>Email: {{user.email}}</p>
+      <button mat-raised-button color="primary" (click)="routeToOrders()">Orders</button>
+    </mat-card-content>
+  </mat-card>
+</div>

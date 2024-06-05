@@ -107,7 +107,7 @@ export class ListProductsComponent implements OnInit {
       idImage: 0,
       alt: 'Image not found',
       file: 'https://placehold.co/400',
-      idProduct: product,
+      Product: product,
     };
   }
   sortOrder(sort_order: 'asc' | 'desc'): void {

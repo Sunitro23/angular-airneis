@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-list>
+    <mat-list-item>
+      <div class="grid grid-cols-5 gap-5">
+        <div class="col-span-1 truncate"><strong>ID</strong></div>
+        <div class="col-span-1 truncate"><strong>Name</strong></div>
+        <div class="col-span-1 truncate"><strong>Price</strong></div>
+        <div class="col-span-1 truncate"><strong>Description</strong></div>
+        <div class="col-span-1 truncate"><strong>Quantity</strong></div>
+      </div>
+    </mat-list-item>
+
+    <mat-list-item *ngFor="let product of products">
+      <div class="grid grid-cols-5 gap-5">
+        <div class="col-span-1 truncate">{{ product.idProduct }}</div>
+        <div class="col-span-1 truncate">{{ product.name }}</div>
+        <div class="col-span-1 truncate">{{ product.price }}</div>
+        <div class="col-span-1 truncate">{{ product.description }}</div>
+        <div class="col-span-1 truncate">{{ productQuantities[product.idProduct] }}</div>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

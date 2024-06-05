@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductImages } from 'src/app/models/type-product.model';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Image } from 'src/app/models/type-image.model';
+import { Product, ProductImages } from 'src/app/models/type-product.model';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MyDialogComponent } from '../dialog-added/dialog-added.component';
 
 @Component({
   selector: 'app-one-product',
@@ -10,10 +15,15 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class OneProductComponent implements OnInit {
   productId!: number | null;
-  product!: ProductImages;
+  product: ProductImages = {
+    product: this.createMockProduct(),
+    images: [this.createMockImage()],
+  };
   constructor(
     private route: ActivatedRoute,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _cartService: CartService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +34,68 @@ export class OneProductComponent implements OnInit {
   loadProduct(): void {
     this._productService.getProductById(this.productId).then((data) => {
       this.product = data;
+    });
+  }
+  addProductToCart(): void {
+    this._cartService.addProductToCart(this.product.product);
+    this.openDialog();
+  }
+
+  customOptions: OwlOptions = {
+    items: this.product.images.length,
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    nav: true,
+    center: true,
+    autoplay: true,
+    margin: 10,
+    navText: ['<', '>'],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 1,
+      },
+      740: {
+        items: 1,
+      },
+      940: {
+        items: 1,
+      },
+    },
+  };
+
+  // Mock ProductImages
+
+  createMockProduct(): Product {
+    return {
+      idProduct: 0,
+      name: '',
+      description: '',
+      price: 0,
+      stock: 0,
+      Category: {
+        idCategory: 0,
+        libelle: '',
+      },
+      date_published: new Date(),
+    };
+  }
+  createMockImage(): Image {
+    return {
+      idImage: 0,
+      alt: 'Image not found',
+      file: 'https://placehold.co/400',
+      Product: this.createMockProduct(),
+    };
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MyDialogComponent, {
+      width: '250px',
     });
   }
 }

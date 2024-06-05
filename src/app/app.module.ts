@@ -1,3 +1,4 @@
+import { CartModule } from './pages/cart/cart.module';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +17,7 @@ import { ProductsModule } from './pages/products/products.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CartModule,
     HttpClientModule,
     AuthModule,
     MenuModule,
